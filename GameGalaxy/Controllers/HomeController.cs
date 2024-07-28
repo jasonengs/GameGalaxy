@@ -47,10 +47,10 @@ namespace GameGalaxy.Controllers
 
             return View(model);
         }
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
         public IActionResult GameDetails(string id)
         {
             return View();
