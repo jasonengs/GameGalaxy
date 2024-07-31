@@ -50,6 +50,25 @@ namespace GameGalaxy.Controllers
 
             return View(model);
         }
+
+        public IActionResult Details(int id)
+        {
+            var game = context.Games
+                .Include(g => g.Genre)
+                .Include(g => g.GamePlatforms)
+                    .ThenInclude(gp => gp.Platform)
+                .FirstOrDefault(g => g.GameId == id);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            return View(game);
+        }
+
+
+
         //public IActionResult Privacy()
         //{
         //    return View();

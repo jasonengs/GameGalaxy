@@ -22,6 +22,33 @@
     </div>
 </div>
 
+
+<div class="container mb-3">
+    <h2 class="text-center mb-3">Upcoming Games</h2>
+    <div class="row justify-content-center mt-5">
+        @foreach (var game in Model.UpcomingGames)
+        {
+            <div class="col d-flex justify-content-center mb-3">
+                <div class="card" style="width: 15rem;">
+                    <a href="@Url.Action("Details", "Home", new { id = game.GameId })">
+                        <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title" style="height: 318px;">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate">@game.Title</h5>
+                        <p class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="@Url.Action("Details", "Home", new { id = game.GameId })" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+
+
 <div class="container mb-3">
     <h2 class="text-center mb-3">Most Popular Games</h2>
     <div class="row justify-content-center mt-5">
