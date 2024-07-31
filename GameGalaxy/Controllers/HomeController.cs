@@ -21,6 +21,7 @@ namespace GameGalaxy.Controllers
                 .Include(g => g.GamePlatforms)
                     .ThenInclude(gp => gp.Platform)
                 .Where(g => g.ReleaseDate > DateTime.Now)
+                .Take(4)
                 .ToList();
 
             var mostPopularGames = context.Games
@@ -29,6 +30,7 @@ namespace GameGalaxy.Controllers
                     .ThenInclude(gp => gp.Platform)
                 .Where(g => g.Rating > 95)
                 .OrderByDescending(g => g.ReleaseDate)
+                .Take(4)
                 .ToList();
 
             var mostRecentReleasedGames = context.Games
@@ -36,6 +38,7 @@ namespace GameGalaxy.Controllers
                 .Include(g => g.GamePlatforms)
                     .ThenInclude(gp => gp.Platform)
                 .Where(g => g.ReleaseDate.Year == 2024 && g.ReleaseDate < DateTime.Now)
+                .Take(4)
                 .ToList();
 
             var model = new GameViewModel
@@ -57,19 +60,19 @@ namespace GameGalaxy.Controllers
         }
         public IActionResult Login()
         {
-            return View();
+            return View("Login");
         }
         public IActionResult Cart()
         {
-            return View();
+            return View("Cart");
         }
         public IActionResult Wishlist()
         {
-            return View();
+            return View("Wishlist");
         }
         public IActionResult Account()
         {
-            return View();
+            return View("Account");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

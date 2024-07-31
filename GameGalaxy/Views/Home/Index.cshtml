@@ -3,47 +3,18 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    .card-img, .card-img-top{
-        width: 214px;
-        height: 286px;
-    }
-</style>
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
-
-@* <div class="container">
-    @foreach (var game in Model.UpcomingGames)
-    {
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
-                <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title">
-                <div class="card-body">
-                    <h5 class="card-title">@game.Title</h5>
-                    <p class="card-text">@game.Description</p>
-                    <a href="@Url.Action("Details", "Games", new { id = game.GameId })" class="btn btn-primary">More Info</a>
-                </div>
-            </div>
-        </div>
-    }
-
-</div> *@
-
-
 <div class="container mb-3">
-    <h2 class="text-center mb-3">Games</h2>
-    <div class="row">
+    <h2 class="text-center mb-3">Upcoming Games</h2>
+    <div class="row justify-content-center mt-5">
         @foreach (var game in Model.UpcomingGames)
         {
-            <div class="col-md-3 d-flex justify-content-center" style="width: 15rem;">
-                <div class="card">
-                    <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title">
+            <div class="col d-flex justify-content-center mb-3">
+                <div class="card" style="width: 15rem;">
+                    <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title" style="height: 318px;">
                     <div class="card-body">
-                        <h5 class="card-title">@game.Title</h5>
-                        <p class="card-text">$$$</p>
+                        <h5 class="card-title text-truncate">@game.Title</h5>
+                        <p class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
@@ -53,15 +24,16 @@
 
 <div class="container mb-3">
     <h2 class="text-center mb-3">Most Popular Games</h2>
-    <div class="row">
+    <div class="row justify-content-center mt-5">
         @foreach (var game in Model.MostPopularGames)
         {
-            <div class="col-md-3 d-flex justify-content-center" style="width: 15rem;">
-                <div class="card">
-                    <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title">
+            <div class="col d-flex justify-content-center mb-3">
+                <div class="card" style="width: 15rem;">
+                    <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title" style="height: 318px;">
                     <div class="card-body">
-                        <h5 class="card-title">@game.Title</h5>
-                        <p class="card-text">$$$</p>
+                        <h5 class="card-title text-truncate">@game.Title</h5>
+                        <p class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
@@ -71,18 +43,22 @@
 
 <div class="container mb-3">
     <h2 class="text-center mb-3">Most Recent Released Games</h2>
-    <div class="row">
+    <div class="row justify-content-center mt-5">
         @foreach (var game in Model.MostRecentReleasedGames)
         {
-            <div class="col-md-3 d-flex justify-content-center" style="width: 15rem;">
-                <div class="card">
-                    <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title">
+            <div class="col d-flex justify-content-center mb-3">
+                <div class="card" style="width: 15rem;">
+                    <img src="~/img/@game.Image" class="card-img-top" alt="@game.Title" style="height: 318px;">
                     <div class="card-body">
-                        <h5 class="card-title">@game.Title</h5>
-                        <p class="card-text">$$$</p>
+                        <h5 class="card-title text-truncate">@game.Title</h5>
+                        <p class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                 </div>
             </div>
         }
     </div>
 </div>
+
+
+

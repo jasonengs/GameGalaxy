@@ -39,5 +39,9 @@ namespace GameGalaxy.Controllers
                 .ToList();
             return View(games);
         }
+        public IActionResult Edit()
+        {
+            return View();
+        }
     }
 }

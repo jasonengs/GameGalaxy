@@ -22,7 +22,7 @@ namespace GameGalaxy.Models
 
         // Navigation Property
         public Genre Genre { get; set; }
-        [Required(ErrorMessage = "Please Enter a Publishing Date")]
+        [Required(ErrorMessage = "Please Enter a Release Date")]
         public DateTime ReleaseDate { get; set; }
         [Required(ErrorMessage = "Please Enter a Game Rating")]
         [Range(0, 100, ErrorMessage = "Rating must be between 0 and 100")]
