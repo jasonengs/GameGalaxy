@@ -4,6 +4,31 @@
     ViewData["Title"] = Model.Title;
 }
 
+<style>
+    .platform-microsoft {
+        color: #00A2ED;
+        border-color: #00A2ED;
+    }
+    .platform-playstation {
+        color: black;
+        border-color: black;
+    }
+    .platform-xbox {
+        color: #0E7A0D;
+        border-color: #0E7A0D;
+    }
+    .platform-nintendo {
+        color: #FE0016;
+        border-color: #FE0016;
+    }
+    .platform-microsoft:hover {
+        color: #00A2ED;
+        border-color: #00A2ED;
+        background-color: white;
+    }
+
+</style>
+
 @* <div class="container">
     <div class="row">
         <div class="col-md-4">
@@ -60,7 +85,7 @@
             <div>
                 @foreach (var gamePlatform in Model.GamePlatforms)
                 {
-                    <button class="btn btn-outline-primary platform-button me-2" data-price="@gamePlatform.Price" title="@gamePlatform.Platform.Name">
+                    <button class="btn btn-outline-primary platform-button me-2 platform-@gamePlatform.Platform.Name.ToLower().Split(" ")[0]" data-price="@gamePlatform.Price" title="@gamePlatform.Platform.Name">
                         @{
                             switch (gamePlatform.Platform.Name.ToLower())
                             {
