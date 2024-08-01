@@ -1,5 +1,152 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model GameGalaxy.Models.Game
+
 @{
+    ViewData["Title"] = Model.Title;
+}
+
+<style>
+    img {
+        width: 264px !important;
+        height: 352px !important;
+        border-radius: 0.5rem;
+    }
+    .game-info .label {
+        min-width: 140px;
+        display: inline-block;
+        font-weight: bolder;
+    }
+    #price {
+        font-size: 1.5rem;
+        font-weight:bolder;
+
+    }
+    .platform-microsoft {
+        color: #00A2ED;
+        border-color: #00A2ED;
+    }
+    .platform-playstation {
+        color: black;
+        border-color: black;
+    }
+    .platform-xbox {
+        color: #0E7A0D;
+        border-color: #0E7A0D;
+    }
+    .platform-nintendo {
+        color: #FE0016;
+        border-color: #FE0016;
+    }
+    .platform-microsoft:hover {
+        color: white;
+        border-color: white;
+        background-color: #00A2ED;
+    }
+    .platform-playstation:hover {
+        color: white;
+        border-color: white;
+        background-color: black;
+    }
+    .platform-xbox:hover {
+        color: white;
+        border-color: white;
+        background-color: #0E7A0D;
+    }
+    .platform-nintendo:hover {
+        color: white;
+        border-color: white;
+        background-color: #FE0016;
+    }
+    .add-to-cart {
+        padding-right: 0;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/img/@Model.Image" class="img-fluid" alt="@Model.Title">
+        </div>
+        <div class="col-md-8">
+            <h1>@Model.Title</h1>
+            <div class="game-info">
+                <div class="d-flex mb-2">
+                    <span id="price">@Model.GamePlatforms.FirstOrDefault()?.Price.ToString("C")</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <span class="label">Rating:</span>
+                    <span class="rating-box">@Model.Rating</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <span class="label">Developer:</span>
+                    <span class="rating-box">@Model.Developer</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <span class="label">Publisher:</span>
+                    <span class="rating-box">@Model.Publisher</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <span class="label">Genre:</span>
+                    <span class="rating-box">@Model.Genre.Name</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <span class="label">Release Date:</span>
+                    <span class="rating-box">@Model.ReleaseDate.ToShortDateString()</span>
+                </div>
+                <div class="d-flex mb-2">
+                    <span class="d-flex align-items-center label">Platform:</span>
+                    <span> 
+                        @foreach (var gamePlatform in Model.GamePlatforms)
+                        {
+                            <button class="btn btn-outline-primary platform-button me-2 platform-@gamePlatform.Platform.Name.ToLower().Split(" ")[0]" data-price="@gamePlatform.Price" title="@gamePlatform.Platform.Name">
+                                @{
+                                    switch (gamePlatform.Platform.Name.ToLower())
+                                    {
+                                        case "microsoft windows":
+                                            <i class="bi bi-microsoft"></i>;
+                                            break;
+                                        case "playstation 5":
+                                            <i class="bi bi-playstation"></i>;
+                                            break;
+                                        case "xbox series x|s":
+                                            <i class="bi bi-xbox"></i>;
+                                            break;
+                                        case "nintendo switch":
+                                            <i class="bi bi-nintendo-switch"></i>;
+                                            break;
+                                    }
+                                }
+                            </button>
+                        }
+                    </span>
+                </div>
+            </div>
+            <div class="row pe-0">
+                <div class="col-9 add-to-cart">
+                    <button class="btn btn-primary w-100">Add To Cart</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-primary"><i class="bi bi-heart"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-5">
+        <div class="col ">
+            <h4>About This Game</h4>
+            <p>@Model.Description</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.querySelectorAll('.platform-button').forEach(function (button) {
+            button.addEventListener('click', function (event) {
+                event.preventDefault();
+                var price = this.getAttribute('data-price');
+                document.getElementById('price').textContent = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(price);
+            });
+        });
+    </script>
 }

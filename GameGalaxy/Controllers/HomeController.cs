@@ -51,7 +51,7 @@ namespace GameGalaxy.Controllers
             return View(model);
         }
 
-        public IActionResult Details(int id)
+        public IActionResult GameDetails(int id)
         {
             var game = context.Games
                 .Include(g => g.Genre)
@@ -73,10 +73,6 @@ namespace GameGalaxy.Controllers
         //{
         //    return View();
         //}
-        public IActionResult GameDetails(string id)
-        {
-            return View();
-        }
         public IActionResult Login()
         {
             return View("Login");
