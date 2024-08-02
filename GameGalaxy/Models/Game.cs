@@ -7,14 +7,14 @@ namespace GameGalaxy.Models
         public int GameId { get; set; } // Primary Key
 
         [Required(ErrorMessage = "Please Enter a Name")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         [Required(ErrorMessage = "Please Enter a Game Description")]
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please Enter a Developer Name")]
-        public string Developer { get; set; }
+        public string Developer { get; set; } = string.Empty;
         [Required(ErrorMessage = "Please Enter a Publisher Name")]
-        public string Publisher { get; set; }
+        public string Publisher { get; set; } = string.Empty;
         [Required(ErrorMessage = "Please Enter a Game Genre")]
 
         // Foreign Key
