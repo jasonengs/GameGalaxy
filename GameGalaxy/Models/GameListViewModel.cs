@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using GameGalaxy.Models.DomainModels;
+using GameGalaxy.Models.ViewModel;
 
 namespace GameGalaxy.Models
 {

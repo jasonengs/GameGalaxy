@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GameGalaxy.Models;
+using GameGalaxy.Models.ViewModel;
 using System.Linq;
 
 namespace GameGalaxy.Controllers

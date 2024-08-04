@@ -27,7 +27,7 @@ namespace GameGalaxy.Models
         [Required(ErrorMessage = "Please Enter a Game Rating")]
         [Range(0, 100, ErrorMessage = "Rating must be between 0 and 100")]
         public int Rating { get; set; }
-        public string Image{ get; set; }
+        public string Image { get; set; }
         public IList<GamePlatform> GamePlatforms { get; } = new List<GamePlatform>();
     }
 }

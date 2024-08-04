@@ -1,4 +1,6 @@
-﻿namespace GameGalaxy.Models
+﻿using GameGalaxy.Models.DomainModels;
+
+namespace GameGalaxy.Models.ViewModel
 {
     public class PlatformViewModel
     {

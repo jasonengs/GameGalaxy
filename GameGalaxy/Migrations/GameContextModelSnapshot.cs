@@ -22,6 +22,45 @@ namespace GameGalaxy.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("GameGalaxy.Models.DomainModels.Platform", b =>
+                {
+                    b.Property<int>("PlatformId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlatformId");
+
+                    b.ToTable("Platforms");
+
+                    b.HasData(
+                        new
+                        {
+                            PlatformId = 1,
+                            Name = "Microsoft Windows"
+                        },
+                        new
+                        {
+                            PlatformId = 2,
+                            Name = "Playstation 5"
+                        },
+                        new
+                        {
+                            PlatformId = 3,
+                            Name = "Xbox Series X|S"
+                        },
+                        new
+                        {
+                            PlatformId = 4,
+                            Name = "Nintendo Switch"
+                        });
+                });
+
             modelBuilder.Entity("GameGalaxy.Models.Game", b =>
                 {
                     b.Property<int>("GameId")
@@ -1964,45 +2003,6 @@ namespace GameGalaxy.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GameGalaxy.Models.Platform", b =>
-                {
-                    b.Property<int>("PlatformId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PlatformId");
-
-                    b.ToTable("Platforms");
-
-                    b.HasData(
-                        new
-                        {
-                            PlatformId = 1,
-                            Name = "Microsoft Windows"
-                        },
-                        new
-                        {
-                            PlatformId = 2,
-                            Name = "Playstation 5"
-                        },
-                        new
-                        {
-                            PlatformId = 3,
-                            Name = "Xbox Series X|S"
-                        },
-                        new
-                        {
-                            PlatformId = 4,
-                            Name = "Nintendo Switch"
-                        });
-                });
-
             modelBuilder.Entity("GameGalaxy.Models.Game", b =>
                 {
                     b.HasOne("GameGalaxy.Models.Genre", "Genre")
@@ -2022,7 +2022,7 @@ namespace GameGalaxy.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameGalaxy.Models.Platform", "Platform")
+                    b.HasOne("GameGalaxy.Models.DomainModels.Platform", "Platform")
                         .WithMany("GamePlatforms")
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2033,6 +2033,11 @@ namespace GameGalaxy.Migrations
                     b.Navigation("Platform");
                 });
 
+            modelBuilder.Entity("GameGalaxy.Models.DomainModels.Platform", b =>
+                {
+                    b.Navigation("GamePlatforms");
+                });
+
             modelBuilder.Entity("GameGalaxy.Models.Game", b =>
                 {
                     b.Navigation("GamePlatforms");
@@ -2041,11 +2046,6 @@ namespace GameGalaxy.Migrations
             modelBuilder.Entity("GameGalaxy.Models.Genre", b =>
                 {
                     b.Navigation("Games");
-                });
-
-            modelBuilder.Entity("GameGalaxy.Models.Platform", b =>
-                {
-                    b.Navigation("GamePlatforms");
                 });
 #pragma warning restore 612, 618
         }

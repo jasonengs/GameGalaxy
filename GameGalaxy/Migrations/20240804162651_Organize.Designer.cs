@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameGalaxy.Migrations
 {
     [DbContext(typeof(GameContext))]
-    [Migration("20240726165845_Initial")]
-    partial class Initial
+    [Migration("20240804162651_Organize")]
+    partial class Organize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,45 @@ namespace GameGalaxy.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("GameGalaxy.Models.DomainModels.Platform", b =>
+                {
+                    b.Property<int>("PlatformId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PlatformId");
+
+                    b.ToTable("Platforms");
+
+                    b.HasData(
+                        new
+                        {
+                            PlatformId = 1,
+                            Name = "Microsoft Windows"
+                        },
+                        new
+                        {
+                            PlatformId = 2,
+                            Name = "Playstation 5"
+                        },
+                        new
+                        {
+                            PlatformId = 3,
+                            Name = "Xbox Series X|S"
+                        },
+                        new
+                        {
+                            PlatformId = 4,
+                            Name = "Nintendo Switch"
+                        });
+                });
 
             modelBuilder.Entity("GameGalaxy.Models.Game", b =>
                 {
@@ -422,7 +461,7 @@ namespace GameGalaxy.Migrations
                             GameId = 30,
                             Description = "Deathloop transports players to the lawless island of Blackreef in an eternal struggle between two extraordinary assassins. Explore stunning environments and meticulously designed levels in an immersive gameplay experience that lets you approach every situation any way you like. Hunt down targets all over the island in an effort to put an end to the cycle once and for all, and remember, if at first you don’t succeed… die, die again.",
                             Developer = "Arkane Studios",
-                            GenreId = 3,
+                            GenreId = 6,
                             Image = "deathloop.webp",
                             Publisher = "Bethesda Softworks",
                             Rating = 88,
@@ -1967,45 +2006,6 @@ namespace GameGalaxy.Migrations
                         });
                 });
 
-            modelBuilder.Entity("GameGalaxy.Models.Platform", b =>
-                {
-                    b.Property<int>("PlatformId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatformId"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("PlatformId");
-
-                    b.ToTable("Platforms");
-
-                    b.HasData(
-                        new
-                        {
-                            PlatformId = 1,
-                            Name = "Microsoft Windows"
-                        },
-                        new
-                        {
-                            PlatformId = 2,
-                            Name = "Playstation 5"
-                        },
-                        new
-                        {
-                            PlatformId = 3,
-                            Name = "Xbox Series X|S"
-                        },
-                        new
-                        {
-                            PlatformId = 4,
-                            Name = "Nintendo Switch"
-                        });
-                });
-
             modelBuilder.Entity("GameGalaxy.Models.Game", b =>
                 {
                     b.HasOne("GameGalaxy.Models.Genre", "Genre")
@@ -2025,7 +2025,7 @@ namespace GameGalaxy.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GameGalaxy.Models.Platform", "Platform")
+                    b.HasOne("GameGalaxy.Models.DomainModels.Platform", "Platform")
                         .WithMany("GamePlatforms")
                         .HasForeignKey("PlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -2036,6 +2036,11 @@ namespace GameGalaxy.Migrations
                     b.Navigation("Platform");
                 });
 
+            modelBuilder.Entity("GameGalaxy.Models.DomainModels.Platform", b =>
+                {
+                    b.Navigation("GamePlatforms");
+                });
+
             modelBuilder.Entity("GameGalaxy.Models.Game", b =>
                 {
                     b.Navigation("GamePlatforms");
@@ -2044,11 +2049,6 @@ namespace GameGalaxy.Migrations
             modelBuilder.Entity("GameGalaxy.Models.Genre", b =>
                 {
                     b.Navigation("Games");
-                });
-
-            modelBuilder.Entity("GameGalaxy.Models.Platform", b =>
-                {
-                    b.Navigation("GamePlatforms");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GameGalaxy.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using GameGalaxy.Models.DomainModels;
 
 namespace GameGalaxy.Controllers
 {

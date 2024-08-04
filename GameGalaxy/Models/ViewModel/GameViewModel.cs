@@ -1,4 +1,4 @@
-﻿namespace GameGalaxy.Models
+﻿namespace GameGalaxy.Models.ViewModel
 {
     public class GameViewModel
     {
