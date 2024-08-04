@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@inject GameGalaxy.Models.GameContext context
+
+@{
+    var genres = context.Genres.ToList();
+    ViewBag.Genres = genres;
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,12 +35,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Categories
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach (var genre in ViewBag.Genres)
+                                {
+                                    <a class="dropdown-item" asp-controller="Category" asp-action="Genre" asp-route-id="@genre.GenreId">@genre.Name</a>
+                                }
+                            </div>
+                        </li>
                     </ul>
                     <form class="d-flex" method="get" asp-controller="Search" asp-action="Search">
                         <input class="form-control me-2" type="search" name="query" placeholder="Search games..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
-
                 </div>
             </div>
         </nav>

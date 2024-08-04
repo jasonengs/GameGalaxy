@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameGalaxy.Models;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GameGalaxy.Controllers
 {

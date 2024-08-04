@@ -48,6 +48,8 @@ namespace GameGalaxy.Controllers
                 MostRecentReleasedGames = mostRecentReleasedGames
             };
 
+            ViewBag.Category = context.Genres.ToList();
+
             return View(model);
         }
 
