@@ -51,7 +51,45 @@ namespace GameGalaxy.Controllers
             return View("Genres", model);
         }
 
+        public IActionResult Platform(int id, int page = 1)
+        {
+            var platform = context.Platforms
+                .Where(p => p.PlatformId == id)
+                .FirstOrDefault();
 
+            if (platform == null)
+            {
+                return NotFound();
+            }
 
+            var totalGames = context.GamePlatforms
+                .Where(gp => gp.PlatformId == id)
+                .Select(gp => gp.Game)
+                .Count();
+
+            var totalPages = (int)Math.Ceiling(totalGames / (double)PageSize);
+
+            var games = context.GamePlatforms
+                .Include(gp => gp.Game.GamePlatforms)
+                    .ThenInclude(gp => gp.Platform)
+                .Where(gp => gp.PlatformId == id)
+                .Select(gp => gp.Game)
+                .OrderByDescending(g => g.ReleaseDate)
+                .Skip((page - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
+
+            var model = new PlatformViewModel
+            {
+                Platform = platform.Name,
+                Games = games,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            ViewBag.PlatformId = id; // Pass platform ID to the view for pagination links
+
+            return View("Platforms", model);
+        }
     }
 }

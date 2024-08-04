@@ -3,6 +3,9 @@
 @{
     var genres = context.Genres.ToList();
     ViewBag.Genres = genres;
+    
+    var platforms = context.Platforms.ToList();
+    ViewBag.Platforms = platforms;
 }
 
 <!DOCTYPE html>
@@ -43,6 +46,17 @@
                                 @foreach (var genre in ViewBag.Genres)
                                 {
                                     <a class="dropdown-item" asp-controller="Category" asp-action="Genre" asp-route-id="@genre.GenreId">@genre.Name</a>
+                                }
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdownPlatform" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Platforms
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownPlatform">
+                                @foreach (var platform in ViewBag.Platforms)
+                                {
+                                    <a class="dropdown-item" asp-controller="Category" asp-action="Platform" asp-route-id="@platform.PlatformId">@platform.Name</a>
                                 }
                             </div>
                         </li>

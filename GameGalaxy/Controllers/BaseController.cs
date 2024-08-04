@@ -16,7 +16,9 @@ namespace GameGalaxy.Controllers
         public override void OnActionExecuting(ActionExecutingContext ctx)
         {
             var genres = context.Genres.ToList();
-            ViewBag.Genres = genres;
+            ViewBag.Genres = genres; 
+            var platforms = context.Platforms.ToList();
+            ViewBag.Platforms = platforms;
             base.OnActionExecuting(ctx);
         }
     }
