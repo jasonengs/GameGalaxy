@@ -31,12 +31,12 @@ namespace GameGalaxy.Controllers
                 .ToListAsync();
 
             // Perform normalization and filtering in memory
-            query = query.Trim().NormalizeString().ToLower(); 
-            var filteredGames = games.Where(g => 
+            query = query.Trim().NormalizeString().ToLower();
+            var filteredGames = games.Where(g =>
             g.Title.NormalizeString().ToLower().Contains(query) ||
             g.Publisher.NormalizeString().ToLower().Contains(query) ||
             g.Developer.NormalizeString().ToLower().Contains(query)
-            ).ToList();
+            ).OrderByDescending(g => g.ReleaseDate).ToList();
 
             return View("Results", filteredGames);
         }
