@@ -5,7 +5,7 @@ namespace GameGalaxy.Models
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Please enter a email.")]
-        [StringLength(255)]
+        [EmailAddress]
         public string Email{ get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please enter a password.")]

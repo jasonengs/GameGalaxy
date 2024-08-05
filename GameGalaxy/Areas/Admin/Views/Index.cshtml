@@ -1,0 +1,133 @@
+﻿@model List<Game>
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<style>
+    .bi-microsoft {
+        color: #00A2ED;
+    }
+
+    .bi-playstation {
+        color: black;
+    }
+
+    .bi-xbox {
+        color: #0E7A0D;
+    }
+
+    .bi-nintendo-switch {
+        color: #FE0016;
+    }
+
+    .pagination .page-item .page-link {
+        color: #007bff; /* Default text color */
+        background-color: #fff; /* Default background color */
+        border: 1px solid #dee2e6; /* Default border color */
+    }
+
+    .pagination .page-item.active .page-link {
+        color: #fff; /* Active text color */
+        background-color: #007bff; /* Active background color */
+        border-color: #007bff; /* Active border color */
+    }
+
+    .pagination .page-item .page-link:hover {
+        color: #0056b3; /* Hover text color */
+        background-color: #e9ecef; /* Hover background color */
+        border-color: #dee2e6; /* Hover border color */
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #6c757d; /* Disabled text color */
+        background-color: #fff; /* Disabled background color */
+        border-color: #dee2e6; /* Disabled border color */
+    }
+
+    .game-title img {
+        width: 50px;
+        height: 66.66px;
+        border-radius: 2px;
+        margin-right: 5px;
+    }
+
+    .game-title {
+        display: ex;
+        align-items: center;
+    }
+
+        .game-title span {
+            display: inline-block;
+            max-width: 260px; /* Adjust as necessary */
+            word-wrap: break-word;
+        }
+
+    .edit {
+        text-align: center;
+    }
+</style>
+<h2>Dashboard</h2>
+
+<table id="gamesTable"
+       data-toggle="table"
+       data-search="true"
+       data-pagination="true"
+       data-page-size="10"
+       data-page-list="[10, 25, 50, 100]"
+       class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th data-sortable="true">Title</th>
+            <th data-sortable="true">Developer</th>
+            <th data-sortable="true">Publisher</th>
+            <th data-sortable="true">Release Date</th>
+            <th data-sortable="true">Genre</th>
+            <th data-sortable="true">Rating</th>
+            <th>Platform</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var game in Model)
+        {
+            <tr>
+                <td class="game-title">
+                    <img src="~/img/@game.Image" alt="@game.Title" />
+                    <span>@game.Title</span>
+                </td>
+                <td>@game.Developer</td>
+                <td>@game.Publisher</td>
+                <td>@game.ReleaseDate.ToString("yyyy-MM-dd")</td>
+                <td>@game.Genre.Name</td>
+                <td>@game.Rating</td>
+                <td class="platform-icon">
+                    @foreach (var platform in game.GamePlatforms.Select(gp => gp.Platform))
+                    {
+                        @if (platform.Name == "Microsoft Windows")
+                        {
+                            <i class="bi bi-microsoft" title="Microsoft Windows"></i>
+                        }
+                        @if (platform.Name == "Playstation 5")
+                        {
+                            <i class="bi bi-playstation" title="Playstation 5"></i>
+                        }
+                        @if (platform.Name == "Xbox Series X|S")
+                        {
+                            <i class="bi bi-xbox" title="Xbox Series X|S"></i>
+                        }
+                        @if (platform.Name == "Nintendo Switch")
+                        {
+                            <i class="bi bi-nintendo-switch" title="Nintendo Switch"></i>
+                        }
+                    }
+                </td>
+                <td class="edit">
+                    <a asp-controller="Game" asp-action="Edit"
+                       asp-route-id="@game.GameId">
+                        <i class="bi bi-pencil-square" title="Edit"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -4,8 +4,8 @@ namespace GameGalaxy.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Please enter a email.")]
-        [StringLength(255)]
+        [Required(ErrorMessage = "Please enter your email.")]
+        [EmailAddress]
         public string Email { get; set; } = string.Empty;
         
         [Required(ErrorMessage = "Please enter a first name.")]

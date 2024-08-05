@@ -6,6 +6,13 @@
     
     var platforms = context.Platforms.ToList();
     ViewBag.Platforms = platforms;
+
+    // use current controller or area to determine if tab is active
+    var current = ViewContext.RouteData.Values["area"]?.ToString() ??
+        ViewContext.RouteData.Values["controller"]!.ToString()!;
+
+    // use current action to determine active tab for register and change password tabs
+    var action = ViewContext.RouteData.Values["action"]?.ToString()!;
 }
 
 <!DOCTYPE html>
@@ -35,9 +42,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-@*                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li> *@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Categories
@@ -60,7 +64,49 @@
                                 }
                             </div>
                         </li>
-
+                        <!-- These Login buttons and links could be a partial class or a view component -->
+                        @using GameGalaxy.Models.ViewModel
+                        @using Microsoft.AspNetCore.Identity
+                        @inject SignInManager<User> signInManager
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            // signed-in user - Log Out button and username and change password link
+@*                             <li class="nav-item">
+                                <a class="nav-link @Nav.Active("ChangePassword", action)"
+                                   asp-action="ChangePassword" asp-controller="Account" asp-area="">
+                                    <span class="fas fa-edit"></span>&nbsp;Change Password
+                                </a>
+                            </li> *@
+                            <li class="nav-item">
+                                <form method="post" asp-action="LogOut" asp-controller="Account"
+                                      asp-area="">
+                                    <input type="submit" value="Log Out"
+                                           class="btn btn-outline-light" />
+                                    <span class="text-light">@User.Identity?.Name</span>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            // anonymous user - Register link and Log In button
+                            <li class="nav-item">
+                                <a class="nav-link @Nav.Active("Register", action)"
+                                   asp-action="Register" asp-controller="Account" asp-area="">
+                                    <span class="fas fa-edit"></span>&nbsp;Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Login" asp-controller="Account"
+                                   asp-area="" class="btn btn-outline-light">Log In</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link @Nav.Active("Admin", current)"
+                               asp-action="Index" asp-controller="Book" asp-area="Admin">
+                                <span class="fas fa-cog"></span>&nbsp;Admin
+                            </a>
+                        </li>
+                        </li>
                     </ul>
                     <form class="d-flex" method="get" asp-controller="Search" asp-action="Search">
                         <input class="form-control me-2" type="search" name="query" placeholder="Search games..." aria-label="Search">

@@ -1,12 +1,25 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GameGalaxy.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace GameGalaxy.Areas.Admin.Controllers
+namespace GameGalaxy.Controllers
 {
     public class DashboardController : Controller
     {
-        public IActionResult Index()
+        private GameContext context { get; set; }
+        public DashboardController(GameContext ctx)
         {
-            return View();
+            context = ctx;
+        }
+        public IActionResult Index(int page = 1)
+        {
+            var games = context.Games
+                .Include(g => g.Genre)
+                .Include(g => g.GamePlatforms)
+                .ThenInclude(gp => gp.Platform)
+                .OrderByDescending(g => g.GameId)
+                .ToList();
+            return View(games);
         }
     }
 }

@@ -57,6 +57,6 @@ app.MapAreaControllerRoute(
 //    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}");
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}/{slug?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}/{page?}");
 
 app.Run();

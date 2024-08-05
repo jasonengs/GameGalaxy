@@ -27,7 +27,13 @@ namespace GameGalaxy.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { Email = model.Email };
+                var user = new User 
+                { 
+                    Email = model.Email, 
+                    UserName = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
+                };
                 var result = await userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)

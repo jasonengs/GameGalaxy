@@ -10,7 +10,7 @@ namespace GameGalaxy.Models
             var userManager = provider.GetRequiredService<UserManager<User>>();
 
             string email = "administrator@example.com";
-            string password = "Pa$$w0rd ";
+            string password = "Pa$$w0rd";
             string roleName = "Admin";
 
             // if role doesn't exist, create it
