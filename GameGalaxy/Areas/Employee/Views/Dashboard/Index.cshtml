@@ -1,6 +1,6 @@
 ﻿@model List<Game>
 @{
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Employee/Views/Shared/_EmployeeLayout.cshtml";
     ViewBag.Title = "Dashboard";
 }
 
@@ -57,11 +57,11 @@
         align-items: center;
     }
 
-    .game-title span {
-        display: inline-block;
-        max-width: 260px;
-        word-wrap: break-word;
-    }
+        .game-title span {
+            display: inline-block;
+            max-width: 260px;
+            word-wrap: break-word;
+        }
 
     .edit {
         text-align: center;
@@ -85,7 +85,6 @@
             <th data-sortable="true">Genre</th>
             <th data-sortable="true">Rating</th>
             <th>Platform</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -121,12 +120,6 @@
                             <i class="bi bi-nintendo-switch" title="Nintendo Switch"></i>
                         }
                     }
-                </td>
-                <td class="edit">
-                    <a asp-controller="Game" asp-action="Edit"
-                       asp-route-id="@game.GameId">
-                        <i class="bi bi-pencil-square" title="Edit"></i>
-                    </a>
                 </td>
             </tr>
         }

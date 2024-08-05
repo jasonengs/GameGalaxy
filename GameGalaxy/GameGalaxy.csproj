@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Employee\Models\" />
     <Folder Include="Views\Cart\" />
   </ItemGroup>
 

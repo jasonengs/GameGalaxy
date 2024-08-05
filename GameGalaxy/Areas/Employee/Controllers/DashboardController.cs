@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameGalaxy.Areas.Admin.Controllers
+namespace GameGalaxy.Areas.Employee.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Area("Employee")]
+    [Authorize(Roles = "Employee")]
     public class DashboardController : Controller
     {
         private GameContext context { get; set; }
