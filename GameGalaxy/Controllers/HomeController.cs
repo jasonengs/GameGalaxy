@@ -1,3 +1,7 @@
+//Done By Group E
+//Members: Tajbir Singh Bal, Ramanathan Sudhan, Jason Eng
+//INFT 3050 Web Programming
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GameGalaxy.Models;
