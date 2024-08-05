@@ -69,28 +69,9 @@ namespace GameGalaxy.Controllers
 
             return View(game);
         }
-
-
-
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-        public IActionResult Login()
-        {
-            return View("Login");
-        }
         public IActionResult Cart()
         {
             return View("Cart");
-        }
-        public IActionResult Wishlist()
-        {
-            return View("Wishlist");
-        }
-        public IActionResult Account()
-        {
-            return View("Account");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

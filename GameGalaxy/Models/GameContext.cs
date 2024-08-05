@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using GameGalaxy.Models.DomainModels;
 
 namespace GameGalaxy.Models
 {
-    public class GameContext : DbContext
+    public class GameContext : IdentityDbContext<User>
     {
         public GameContext(DbContextOptions<GameContext> options) : base(options)
         {
