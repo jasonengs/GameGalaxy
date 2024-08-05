@@ -64,50 +64,51 @@
                                 }
                             </div>
                         </li>
-                        <!-- These Login buttons and links could be a partial class or a view component -->
-                        @using GameGalaxy.Models.ViewModel
-                        @using Microsoft.AspNetCore.Identity
-                        @inject SignInManager<User> signInManager
+                    </ul>
+
+                    <!-- These Login buttons and links could be a partial class or a view component -->
+                    @using Microsoft.AspNetCore.Identity
+                    @inject SignInManager<GameGalaxy.Models.User> signInManager
+                    @inject UserManager<GameGalaxy.Models.User> userManager
+                    <ul class="navbar-nav">
                         @if (signInManager.IsSignedIn(User))
                         {
-                            // signed-in user - Log Out button and username and change password link
-@*                             <li class="nav-item">
-                                <a class="nav-link @Nav.Active("ChangePassword", action)"
-                                   asp-action="ChangePassword" asp-controller="Account" asp-area="">
-                                    <span class="fas fa-edit"></span>&nbsp;Change Password
-                                </a>
-                            </li> *@
                             <li class="nav-item">
-                                <form method="post" asp-action="LogOut" asp-controller="Account"
-                                      asp-area="">
-                                    <input type="submit" value="Log Out"
-                                           class="btn btn-outline-light" />
-                                    <span class="text-light">@User.Identity?.Name</span>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
+                            </li>
+                            <li class="nav-item">
+                                <form method="post" asp-action="LogOut" asp-controller="Account" asp-area="">
+                                    <button type="submit" class="btn btn-outline-dark">Log Out</button>
                                 </form>
                             </li>
+                            <li class="nav-item">
+                                <span class="nav-link text-dark">@User.Identity?.Name</span>
+                            </li>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Admin" asp-controller="Book" asp-action="Index">Admin</a>
+                                </li>
+                            }
+                            @if (User.IsInRole("Employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Employee" asp-controller="Dashboard" asp-action="Index">Employee Dashboard</a>
+                                </li>
+                            }
                         }
                         else
                         {
-                            // anonymous user - Register link and Log In button
                             <li class="nav-item">
-                                <a class="nav-link @Nav.Active("Register", action)"
-                                   asp-action="Register" asp-controller="Account" asp-area="">
-                                    <span class="fas fa-edit"></span>&nbsp;Register
-                                </a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-action="Login" asp-controller="Account"
-                                   asp-area="" class="btn btn-outline-light">Log In</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Log In</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link @Nav.Active("Admin", current)"
-                               asp-action="Index" asp-controller="Book" asp-area="Admin">
-                                <span class="fas fa-cog"></span>&nbsp;Admin
-                            </a>
-                        </li>
-                        </li>
                     </ul>
+
                     <form class="d-flex" method="get" asp-controller="Search" asp-action="Search">
                         <input class="form-control me-2" type="search" name="query" placeholder="Search games..." aria-label="Search">
                         <button class="btn btn-outline-success" type="submit">Search</button>
@@ -116,6 +117,8 @@
             </div>
         </nav>
     </header>
+
+
 
 
     <div class="container">

@@ -43,7 +43,9 @@ app.UseAuthorization();
 var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
 using (var scope = scopeFactory.CreateScope())
 {
+    await ConfigureIdentity.CreateRolesAsync(scope.ServiceProvider);
     await ConfigureIdentity.CreateAdminUserAsync(scope.ServiceProvider);
+    await ConfigureIdentity.CreateEmployeeUserAsync(scope.ServiceProvider);
 }
 
 app.UseSession();
@@ -51,7 +53,11 @@ app.UseSession();
 app.MapAreaControllerRoute(
     name: "admin",
     areaName: "Admin",
-    pattern: "Admin/{controller=Book}/{action=Index}/{id?}");
+    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
+app.MapAreaControllerRoute(
+    name: "employee",
+    areaName: "Employee",
+    pattern: "Employee/{controller=Dashboard}/{action=Index}/{id?}");
 //app.MapControllerRoute(
 //    name: "page_sort",
 //    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}");
