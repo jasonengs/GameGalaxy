@@ -1,5 +1,6 @@
 ﻿@model List<Game>
 @{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Dashboard";
 }
 
@@ -56,11 +57,11 @@
         align-items: center;
     }
 
-        .game-title span {
-            display: inline-block;
-            max-width: 260px; /* Adjust as necessary */
-            word-wrap: break-word;
-        }
+    .game-title span {
+        display: inline-block;
+        max-width: 260px; /* Adjust as necessary */
+        word-wrap: break-word;
+    }
 
     .edit {
         text-align: center;

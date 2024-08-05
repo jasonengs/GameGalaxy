@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using GameGalaxy.Models;
+using System.Threading.Tasks;
 
 namespace GameGalaxy.Controllers
 {
@@ -9,8 +10,7 @@ namespace GameGalaxy.Controllers
         private UserManager<User> userManager;
         private SignInManager<User> signInManager;
 
-        public AccountController(UserManager<User> userMngr,
-            SignInManager<User> signInMngr)
+        public AccountController(UserManager<User> userMngr, SignInManager<User> signInMngr)
         {
             userManager = userMngr;
             signInManager = signInMngr;
@@ -27,9 +27,9 @@ namespace GameGalaxy.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User 
-                { 
-                    Email = model.Email, 
+                var user = new User
+                {
+                    Email = model.Email,
                     UserName = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName
@@ -77,14 +77,22 @@ namespace GameGalaxy.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (!string.IsNullOrEmpty(model.ReturnUrl) &&
-                        Url.IsLocalUrl(model.ReturnUrl))
+                    var user = await userManager.FindByEmailAsync(model.Email);
+                    if (user != null)
                     {
-                        return Redirect(model.ReturnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
+                        var roles = await userManager.GetRolesAsync(user);
+                        if (roles.Contains("Admin"))
+                        {
+                            return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                        }
+                        else if (roles.Contains("Employee"))
+                        {
+                            return RedirectToAction("Index", "Dashboard", new { area = "Employee" });
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
                     }
                 }
             }
@@ -102,7 +110,7 @@ namespace GameGalaxy.Controllers
         {
             var model = new ChangePasswordViewModel
             {
-                Email= User.Identity?.Name ?? ""
+                Email = User.Identity?.Name ?? ""
             };
             return View(model);
         }

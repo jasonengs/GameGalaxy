@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GameGalaxy.Controllers
 {
+    [Area("Admin")]
     public class DashboardController : Controller
     {
         private GameContext context { get; set; }

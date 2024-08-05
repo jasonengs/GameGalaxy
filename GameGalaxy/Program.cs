@@ -58,9 +58,6 @@ app.MapAreaControllerRoute(
     name: "employee",
     areaName: "Employee",
     pattern: "Employee/{controller=Dashboard}/{action=Index}/{id?}");
-//app.MapControllerRoute(
-//    name: "page_sort",
-//    pattern: "{controller}/{action}/page/{pagenumber}/size/{pagesize}/sort/{sortfield}/{sortdirection}");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}/{page?}");
